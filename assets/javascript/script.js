@@ -1,13 +1,39 @@
-const question = [{ "question": "whats my name", "correct": 0, "answerChoices": ["dan", "bill", "dave", "steve"] },
-    { "question": "whats my sisters name", "correct": 1, "answerChoices": ["laura", "kelly", "mary", "pat"] }
-]
+$(document).ready(function() {
+    const question = [{ "question": "whats my name", "correct": 0, "answerChoices": ["dan", "bill", "dave", "steve"] },
+        { "question": "whats my sisters name", "correct": 1, "answerChoices": ["laura", "kelly", "mary", "pat"] }
+    ]
 
-function displayQuestion() {
-    const questionDisplay = question[0];
-    $("#question").text(questionDisplay.question)
-    for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
-        $("#answers").append("<h2>" + questionDisplay.answerChoices[i] + "</h2>")
+
+
+    displayQuestion()
+
+
+
+    function displayQuestion() {
+        const questionDisplay = question[0];
+        $("#question").text(questionDisplay.question);
+        for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
+            button = $("<button>");
+            button.val(i);
+            button.text(questionDisplay.answerChoices[i]);
+            $("#answers").append(button);
+
+        }
+
+        $("button").on("click", function() {
+
+            isCorrect($(this).val(), questionDisplay.correct)
+        })
     }
-}
 
-displayQuestion()
+    function isCorrect(choice, answer) {
+
+        if ((parseInt(choice)) === answer) {
+            console.log("thats the right answer")
+        } else {
+            console.log("wrong answer")
+        }
+    }
+
+
+})
