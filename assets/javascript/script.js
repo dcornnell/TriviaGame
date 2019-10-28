@@ -19,10 +19,12 @@ $(document).ready(function() {
         //keeps track of what question we are on
     let count = 0;
     let qInterval;
-
+    // number of correct answers
     let score = 0;
     let gameOver = false;
     let currentCorrect;
+
+
     displayQuestion();
 
 
@@ -33,19 +35,20 @@ $(document).ready(function() {
 
     function displayQuestion() {
         $("#status").empty()
+        $("#answers").empty()
 
-        clearDisplay()
+
         qInterval = setTimeout(displayTimeout, 3000)
 
         if (gameOver) {
             displayScore()
         } else {
             const questionDisplay = question[count];
-            console.log(questionDisplay.answerChoices[[question[count].correct]])
             currentCorrect = questionDisplay.answerChoices[[question[count].correct]]
             $("#question").text(questionDisplay.question);
             for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
                 button = $("<button>");
+                button.addClass("button expanded");
                 button.val(i);
                 button.text(questionDisplay.answerChoices[i]);
                 $("#answers").append(button);
@@ -61,7 +64,7 @@ $(document).ready(function() {
         }
     }
 
-    // waits a set amount of time then displays the next questions
+    //increase the question count and check if the last question
 
     function nextQuestion() {
 
@@ -74,6 +77,7 @@ $(document).ready(function() {
         displayQuestion();
 
     }
+    // check if the answer selected is the correct one
 
     function isCorrect(choice, answer) {
 
@@ -90,39 +94,47 @@ $(document).ready(function() {
 
 
     }
+    // display the final screen
 
     function displayScore() {
-        $("#status").text("your score was= " + score + "/" + question.length)
+        console.log("hello")
+        $("#question").text("You're all done!")
+        $("#answers").text("your score was= " + score + "/" + question.length)
         clearTimeout(qInterval)
 
 
     }
 
+
+    //displayed after correct answer
+
     function displayCorrect() {
 
-        $("#status").text("Correct");
-        clearDisplay();
+        $("#question").text("Correct");
+        $("#answers").text("");
         setTimeout(nextQuestion, 3000);
     }
 
+    //displayed after inccorect answer
     function displayWrong() {
 
-        $("#status").text("wrong the correct answer was: " + currentCorrect)
-        clearDisplay();
+        $("#question").text("wrong");
+        $("#answers").text("the correct answer was: " + currentCorrect)
+
         setTimeout(nextQuestion, 3000);
 
     }
 
+    // displays if no answer is given
     function displayTimeout() {
-        $("#status").text("to slow the correct answer was: " + currentCorrect)
+        $("#question").text("Times up!")
+        $("#answers").text(currentCorrect + " was the correct answer")
 
-        clearDisplay()
+
         setTimeout(nextQuestion, 3000)
 
     }
 
-    function clearDisplay() {
-        $("#question").empty();
-        $("#answers").empty();
-    }
+
+
 })
