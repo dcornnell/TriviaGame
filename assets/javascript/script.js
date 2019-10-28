@@ -32,7 +32,10 @@ $(document).ready(function() {
     //displays a question
 
     function displayQuestion() {
-        $("#status,#question,#answers").empty();
+        $("#status").empty()
+
+        clearDisplay()
+        qInterval = setTimeout(displayTimeout, 3000)
 
         if (gameOver) {
             displayScore()
@@ -48,11 +51,11 @@ $(document).ready(function() {
             }
 
             $("button").on("click", function() {
-
+                clearTimeout(qInterval);
                 isCorrect($(this).val(), questionDisplay.correct)
             })
 
-            nextQuestion()
+
         }
     }
 
@@ -66,7 +69,7 @@ $(document).ready(function() {
             gameOver = true;
         }
 
-        qInterval = setTimeout(displayQuestion, 3000)
+        displayQuestion();
 
     }
 
@@ -86,26 +89,31 @@ $(document).ready(function() {
 
     function displayScore() {
         $("#status").text("your score was= " + score + "/" + question.length)
+        clearTimeout(qInterval)
 
-        clearInterval(qInterval);
+
     }
 
     function displayCorrect() {
 
         $("#status").text("Correct");
         clearDisplay();
+        setTimeout(nextQuestion, 3000);
     }
 
     function displayWrong() {
 
         $("#status").text("Wrong")
         clearDisplay();
+        setTimeout(nextQuestion, 3000);
 
     }
 
     function displayTimeout() {
-        $("#status").text("oops to slow")
+        $("#status").text("to slow")
+        console.log("to slow")
         clearDisplay()
+        setTimeout(nextQuestion, 3000)
 
     }
 
