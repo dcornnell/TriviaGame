@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     let score = 0;
     let gameOver = false;
-
+    let currentCorrect;
     displayQuestion();
 
 
@@ -41,6 +41,8 @@ $(document).ready(function() {
             displayScore()
         } else {
             const questionDisplay = question[count];
+            console.log(questionDisplay.answerChoices[[question[count].correct]])
+            currentCorrect = questionDisplay.answerChoices[[question[count].correct]]
             $("#question").text(questionDisplay.question);
             for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
                 button = $("<button>");
@@ -85,6 +87,8 @@ $(document).ready(function() {
         } else {
             displayWrong();
         }
+
+
     }
 
     function displayScore() {
@@ -103,15 +107,15 @@ $(document).ready(function() {
 
     function displayWrong() {
 
-        $("#status").text("Wrong")
+        $("#status").text("wrong the correct answer was: " + currentCorrect)
         clearDisplay();
         setTimeout(nextQuestion, 3000);
 
     }
 
     function displayTimeout() {
-        $("#status").text("to slow")
-        console.log("to slow")
+        $("#status").text("to slow the correct answer was: " + currentCorrect)
+
         clearDisplay()
         setTimeout(nextQuestion, 3000)
 
