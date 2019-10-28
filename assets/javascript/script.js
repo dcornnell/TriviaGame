@@ -93,16 +93,24 @@ $(document).ready(function() {
     function displayCorrect() {
 
         $("#status").text("Correct");
-        $("#question").empty();
-        $("#answers").empty();
-
+        clearDisplay();
     }
 
     function displayWrong() {
 
         $("#status").text("Wrong")
+        clearDisplay();
+
+    }
+
+    function displayTimeout() {
+        $("#status").text("oops to slow")
+        clearDisplay()
+
+    }
+
+    function clearDisplay() {
         $("#question").empty();
         $("#answers").empty();
-
     }
 })
