@@ -36,24 +36,24 @@ $(document).ready(function() {
 
         if (gameOver) {
             displayScore()
+        } else {
+            const questionDisplay = question[count];
+            $("#question").text(questionDisplay.question);
+            for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
+                button = $("<button>");
+                button.val(i);
+                button.text(questionDisplay.answerChoices[i]);
+                $("#answers").append(button);
+
+            }
+
+            $("button").on("click", function() {
+
+                isCorrect($(this).val(), questionDisplay.correct)
+            })
+
+            nextQuestion()
         }
-
-        const questionDisplay = question[count];
-        $("#question").text(questionDisplay.question);
-        for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
-            button = $("<button>");
-            button.val(i);
-            button.text(questionDisplay.answerChoices[i]);
-            $("#answers").append(button);
-
-        }
-
-        $("button").on("click", function() {
-
-            isCorrect($(this).val(), questionDisplay.correct)
-        })
-
-        nextQuestion()
     }
 
     // waits a set amount of time then displays the next questions
