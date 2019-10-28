@@ -19,6 +19,8 @@ $(document).ready(function() {
         //keeps track of what question we are on
     let count = 0;
     let qInterval;
+
+    let score = 0;
     displayQuestion();
 
 
@@ -26,7 +28,10 @@ $(document).ready(function() {
 
 
     function displayQuestion() {
-        $("#answers").empty();
+        $("#status,#question,#answers").empty();
+
+
+
         const questionDisplay = question[count];
         $("#question").text(questionDisplay.question);
         for (let i = 0; i < questionDisplay.answerChoices.length; i++) {
@@ -49,7 +54,7 @@ $(document).ready(function() {
 
         qInterval = setTimeout(displayQuestion, 3000)
         count++
-        if (count === question.length) {
+        if (count === question.length + 1) {
             displayScore()
         }
     }
@@ -57,15 +62,36 @@ $(document).ready(function() {
     function isCorrect(choice, answer) {
 
         if ((parseInt(choice)) === answer) {
-            console.log("thats the right answer")
+
+            score++;
+
+            displayCorrect();
+
+
         } else {
-            console.log("wrong answer")
+            displayWrong();
         }
     }
 
     function displayScore() {
-        console.log("you did it");
+        console.log("you did it, your score was " + score);
+
         clearInterval(qInterval);
     }
 
+    function displayCorrect() {
+
+        $("#status").text("Correct");
+        $("#question").empty();
+        $("#answers").empty();
+
+    }
+
+    function displayWrong() {
+
+        $("#status").text("Wrong")
+        $("#question").empty();
+        $("#answers").empty();
+
+    }
 })
