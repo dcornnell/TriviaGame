@@ -1,20 +1,52 @@
 $(document).ready(function() {
     const question = [{
-                "question": "whats my name",
-                "correct": 0,
-                "answerChoices": ["dan", "bill", "dave", "steve"]
+                "question": "What is Princess What's Her Name's real name?",
+                "correct": 2,
+                "answerChoices": ["HEY YOU!", "Chip Butty", "What's Her Name"]
             },
             {
-                "question": "whats my sisters name",
+                "question": "Phrase your response in the form of a question.",
                 "correct": 1,
-                "answerChoices": ["laura", "kelly", "mary", "pat"]
+                "answerChoices": ["No", "Huh?", "Maybe"]
             },
 
             {
-                "question": "whats my brothers name?",
+                "question": "Does misery love company?",
+                "correct": 0,
+                "answerChoices": ["None of your beeswax", "No, 3 is company", "No, misery is not mature enough to distinguish between a simple-pre adolescent crush and true love"]
+            },
+
+            {
+                "question": "Use what in place of butter when cooking?",
+                "correct": 0,
+                "answerChoices": ["Shortening", "Lengthening", "Weasel Feathers"]
+            },
+
+            {
+                "question": "How many doughnuts in a dozen?",
                 "correct": 2,
-                "answerChoices": ["bill", "steve", "brian", "bananaman"]
+                "answerChoices": ["Do I have to share them?", "13, if you smile nicely", "8, by the time you get home."]
+            },
+
+
+            {
+                "question": "FORE!",
+                "correct": 1,
+                "answerChoices": ["4", "Nice Shot!", "Four"]
+            },
+
+            {
+                "question": "Would you like that on account or gift certificate?",
+                "correct": 2,
+                "answerChoices": ["Gift certificate please", "I'll take the ceramic dalmation for $1500", "On account of I'm cool"]
+            },
+            {
+                "question": "The correct answer is?",
+                "correct": 1,
+                "answerChoices": ["None of the below", "I'm not really sure", "Neither of the Above"]
             }
+
+
         ]
         //keeps track of what question we are on
     let count = 0;
@@ -38,7 +70,7 @@ $(document).ready(function() {
         $("#answers").empty()
 
 
-        qInterval = setTimeout(displayTimeout, 3000)
+        qInterval = setTimeout(displayTimeout, 7000)
 
         if (gameOver) {
             displayScore()
@@ -118,7 +150,7 @@ $(document).ready(function() {
     //displayed after inccorect answer
     function displayWrong() {
 
-        $("#question").text("wrong");
+        $("#question").text("Wrong");
         $("#answers").text("the correct answer was: " + currentCorrect)
 
         setTimeout(nextQuestion, 3000);
