@@ -21,16 +21,22 @@ $(document).ready(function() {
     let qInterval;
 
     let score = 0;
+    let gameOver = false;
+
     displayQuestion();
 
 
 
+    //FUNCTIONS
 
+    //displays a question
 
     function displayQuestion() {
         $("#status,#question,#answers").empty();
 
-
+        if (gameOver) {
+            displayScore()
+        }
 
         const questionDisplay = question[count];
         $("#question").text(questionDisplay.question);
@@ -50,13 +56,18 @@ $(document).ready(function() {
         nextQuestion()
     }
 
+    // waits a set amount of time then displays the next questions
+
     function nextQuestion() {
 
-        qInterval = setTimeout(displayQuestion, 3000)
         count++
-        if (count === question.length + 1) {
-            displayScore()
+
+        if (count === question.length) {
+            gameOver = true;
         }
+
+        qInterval = setTimeout(displayQuestion, 3000)
+
     }
 
     function isCorrect(choice, answer) {
@@ -74,7 +85,7 @@ $(document).ready(function() {
     }
 
     function displayScore() {
-        console.log("you did it, your score was " + score);
+        $("#status").text("your score was= " + score + "/" + question.length)
 
         clearInterval(qInterval);
     }
