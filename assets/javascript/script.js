@@ -144,7 +144,9 @@ $(document).ready(function() {
         clearInterval(timerDisplay)
         console.log("hello");
         $("#question").text("You're all done!");
-        $("#answers").html("<p>Right: " + score + "</p><p>Missed: " + wrong + "</p><p>Not Answered: " + (question.length - (score + wrong)) +
+        $("#answers").html("<p>Right: " + score + "</p><p>Missed: " +
+            wrong + "</p><p>Not Answered: " +
+            (question.length - (score + wrong)) +
             "</p><p>Would you like to play again?</p>");
         $("#timer").empty();
         clearTimeout(qInterval);
