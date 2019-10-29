@@ -53,6 +53,7 @@ $(document).ready(function() {
     let qInterval;
     // number of correct answers
     let score = 0;
+    let wrong = 0;
     // used to check if the game is over.
     let gameOver = false;
     // keeps track of the correct answer.
@@ -131,6 +132,7 @@ $(document).ready(function() {
 
 
         } else {
+            wrong++;
             displayWrong();
         }
 
@@ -142,7 +144,7 @@ $(document).ready(function() {
         clearInterval(timerDisplay)
         console.log("hello");
         $("#question").text("You're all done!");
-        $("#answers").html("<p>your score was= " + score + "/" + question.length +
+        $("#answers").html("<p>Right: " + score + "</p><p>Missed: " + wrong + "</p><p>Not Answered: " + (question.length - (score + wrong)) +
             "</p><p>Would you like to play again?</p>");
         $("#timer").empty();
         clearTimeout(qInterval);
@@ -156,7 +158,9 @@ $(document).ready(function() {
         $("#restart").on("click", function() {
             gameOver = false;
             count = 0;
-            score = 0;
+            correctAnswer = 0;
+            wrongAnswer = 0;
+
             displayQuestion();
         })
 
