@@ -56,9 +56,11 @@ $(document).ready(function() {
     let gameOver = false;
     let currentCorrect;
 
+    $("#start").on("click", function() {
 
-    displayQuestion();
+        displayQuestion();
 
+    });
 
 
     //FUNCTIONS
@@ -131,8 +133,22 @@ $(document).ready(function() {
     function displayScore() {
         console.log("hello")
         $("#question").text("You're all done!")
-        $("#answers").text("your score was= " + score + "/" + question.length)
+        $("#answers").html("<p>your score was= " + score + "/" + question.length +
+            "</p><p>Would you like to play again?</p>");
         clearTimeout(qInterval)
+        const restart = $("<button>")
+        restart.attr("id", "restart")
+        restart.addClass("button expanded")
+        restart.text("restart")
+        $("#answers").append(restart)
+
+        $("#restart").on("click", function() {
+            gameOver = false;
+            count = 0;
+            score = 0;
+            displayQuestion();
+        })
+
 
 
     }
@@ -151,7 +167,7 @@ $(document).ready(function() {
     function displayWrong() {
 
         $("#question").text("Wrong");
-        $("#answers").text("the correct answer was: " + currentCorrect)
+        $("#answers").html("the correct answer was: <b>" + currentCorrect + "</b>")
 
         setTimeout(nextQuestion, 3000);
 
@@ -160,7 +176,7 @@ $(document).ready(function() {
     // displays if no answer is given
     function displayTimeout() {
         $("#question").text("Times up!")
-        $("#answers").text(currentCorrect + " was the correct answer")
+        $("#answers").html("<b>" + currentCorrect + "</b> was the correct answer")
 
 
         setTimeout(nextQuestion, 3000)
