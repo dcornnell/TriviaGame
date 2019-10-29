@@ -158,8 +158,10 @@ $(document).ready(function() {
         $("#restart").on("click", function() {
             gameOver = false;
             count = 0;
-            correctAnswer = 0;
-            wrongAnswer = 0;
+
+
+            wrong = 0;
+            score = 0;
 
             displayQuestion();
         })
