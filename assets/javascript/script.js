@@ -57,6 +57,10 @@ $(document).ready(function() {
     let gameOver = false;
     // keeps track of the correct answer.
     let currentCorrect;
+    // question timer
+    let timer = 7;
+    let timerDisplay
+
 
     $("#start").on("click", function() {
 
@@ -72,9 +76,9 @@ $(document).ready(function() {
     function displayQuestion() {
         $("#status").empty();
         $("#answers").empty();
+        startTimer();
 
-
-        qInterval = setTimeout(displayTimeout, 7000)
+        //qInterval = setTimeout(displayTimeout, 7000)
 
         if (gameOver) {
             displayScore();
@@ -92,6 +96,7 @@ $(document).ready(function() {
             }
 
             $("button").on("click", function() {
+                clearInterval(timerDisplay)
                 clearTimeout(qInterval);
                 isCorrect($(this).val(), questionDisplay.correct);
             })
@@ -133,10 +138,12 @@ $(document).ready(function() {
     // display the final screen
 
     function displayScore() {
+        clearInterval(timerDisplay)
         console.log("hello");
         $("#question").text("You're all done!");
         $("#answers").html("<p>your score was= " + score + "/" + question.length +
             "</p><p>Would you like to play again?</p>");
+        $("#timer").empty();
         clearTimeout(qInterval);
         const restart = $("<button>");
         restart.attr("id", "restart");
@@ -160,31 +167,52 @@ $(document).ready(function() {
     //displayed after correct answer
 
     function displayCorrect() {
-
+        clearInterval(timerDisplay)
         $("#question").text("Correct");
         $("#answers").text("");
+        $("#timer").empty();
         setTimeout(nextQuestion, 3000);
     }
 
     //displayed after inccorect answer
     function displayWrong() {
-
+        clearInterval(timerDisplay)
         $("#question").text("Wrong");
         $("#answers").html("the correct answer was: <b>" + currentCorrect + "</b>");
-
+        $("#timer").empty();
         setTimeout(nextQuestion, 3000);
 
     }
 
     // displays if no answer is given
     function displayTimeout() {
+
+        clearInterval(timerDisplay)
         $("#question").text("Times up!");
         $("#answers").html("<b>" + currentCorrect + "</b> was the correct answer");
-
+        $("#timer").empty();
 
         setTimeout(nextQuestion, 3000);
 
     }
+
+    // timer
+
+    function startTimer() {
+        timer = 7;
+        timerDisplay = setInterval(function() {
+
+
+            timer--;
+            if (timer === 0) {
+
+                displayTimeout();
+            }
+            $("#timer").text(timer);
+
+        }, 1000)
+    }
+
 
 
 
