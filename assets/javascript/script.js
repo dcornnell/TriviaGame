@@ -76,6 +76,7 @@ $(document).ready(function() {
     function displayQuestion() {
         $("#status").empty();
         $("#answers").empty();
+        $("#timer").empty();
         startTimer();
 
         //qInterval = setTimeout(displayTimeout, 7000)
@@ -190,7 +191,7 @@ $(document).ready(function() {
         clearInterval(timerDisplay)
         $("#question").text("Times up!");
         $("#answers").html("<b>" + currentCorrect + "</b> was the correct answer");
-        $("#timer").empty();
+        $("#timer").text("");
 
         setTimeout(nextQuestion, 3000);
 
@@ -200,6 +201,7 @@ $(document).ready(function() {
 
     function startTimer() {
         timer = 7;
+        $("#timer").text(timer);
         timerDisplay = setInterval(function() {
 
 
@@ -207,6 +209,7 @@ $(document).ready(function() {
             if (timer === 0) {
 
                 displayTimeout();
+                return;
             }
             $("#timer").text(timer);
 
