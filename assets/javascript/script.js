@@ -53,7 +53,9 @@ $(document).ready(function() {
     let qInterval;
     // number of correct answers
     let score = 0;
+    // used to check if the game is over.
     let gameOver = false;
+    // keeps track of the correct answer.
     let currentCorrect;
 
     $("#start").on("click", function() {
@@ -68,14 +70,14 @@ $(document).ready(function() {
     //displays a question
 
     function displayQuestion() {
-        $("#status").empty()
-        $("#answers").empty()
+        $("#status").empty();
+        $("#answers").empty();
 
 
         qInterval = setTimeout(displayTimeout, 7000)
 
         if (gameOver) {
-            displayScore()
+            displayScore();
         } else {
             const questionDisplay = question[count];
             currentCorrect = questionDisplay.answerChoices[[question[count].correct]]
@@ -91,7 +93,7 @@ $(document).ready(function() {
 
             $("button").on("click", function() {
                 clearTimeout(qInterval);
-                isCorrect($(this).val(), questionDisplay.correct)
+                isCorrect($(this).val(), questionDisplay.correct);
             })
 
 
@@ -102,7 +104,7 @@ $(document).ready(function() {
 
     function nextQuestion() {
 
-        count++
+        count++;
 
         if (count === question.length) {
             gameOver = true;
@@ -131,17 +133,18 @@ $(document).ready(function() {
     // display the final screen
 
     function displayScore() {
-        console.log("hello")
-        $("#question").text("You're all done!")
+        console.log("hello");
+        $("#question").text("You're all done!");
         $("#answers").html("<p>your score was= " + score + "/" + question.length +
             "</p><p>Would you like to play again?</p>");
-        clearTimeout(qInterval)
-        const restart = $("<button>")
-        restart.attr("id", "restart")
-        restart.addClass("button expanded")
-        restart.text("restart")
-        $("#answers").append(restart)
+        clearTimeout(qInterval);
+        const restart = $("<button>");
+        restart.attr("id", "restart");
+        restart.addClass("button expanded");
+        restart.text("restart");
+        $("#answers").append(restart);
 
+        //clears values and restarts the game on click
         $("#restart").on("click", function() {
             gameOver = false;
             count = 0;
@@ -167,7 +170,7 @@ $(document).ready(function() {
     function displayWrong() {
 
         $("#question").text("Wrong");
-        $("#answers").html("the correct answer was: <b>" + currentCorrect + "</b>")
+        $("#answers").html("the correct answer was: <b>" + currentCorrect + "</b>");
 
         setTimeout(nextQuestion, 3000);
 
@@ -175,11 +178,11 @@ $(document).ready(function() {
 
     // displays if no answer is given
     function displayTimeout() {
-        $("#question").text("Times up!")
-        $("#answers").html("<b>" + currentCorrect + "</b> was the correct answer")
+        $("#question").text("Times up!");
+        $("#answers").html("<b>" + currentCorrect + "</b> was the correct answer");
 
 
-        setTimeout(nextQuestion, 3000)
+        setTimeout(nextQuestion, 3000);
 
     }
 
