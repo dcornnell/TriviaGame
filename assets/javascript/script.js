@@ -50,7 +50,7 @@ $(document).ready(function() {
         ]
         //keeps track of what question we are on
     let count = 0;
-    let qInterval;
+
     // number of correct answers
     let score = 0;
     let wrong = 0;
@@ -80,7 +80,7 @@ $(document).ready(function() {
         $("#timer").empty();
         startTimer();
 
-        //qInterval = setTimeout(displayTimeout, 7000)
+
 
         if (gameOver) {
             displayScore();
@@ -98,8 +98,8 @@ $(document).ready(function() {
             }
 
             $("button").on("click", function() {
-                clearInterval(timerDisplay)
-                clearTimeout(qInterval);
+                clearInterval(timerDisplay);
+
                 isCorrect($(this).val(), questionDisplay.correct);
             })
 
@@ -149,7 +149,6 @@ $(document).ready(function() {
             (question.length - (score + wrong)) +
             "</p><p>Would you like to play again?</p>");
         $("#timer").empty();
-        clearTimeout(qInterval);
         const restart = $("<button>");
         restart.attr("id", "restart");
         restart.addClass("button expanded");
@@ -160,8 +159,6 @@ $(document).ready(function() {
         $("#restart").on("click", function() {
             gameOver = false;
             count = 0;
-
-
             wrong = 0;
             score = 0;
 
