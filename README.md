@@ -1,4 +1,6 @@
 # Trivia Game
+## Deployed Link
+ https://dcornnell.github.io/TriviaGame/
 
 ## About
 A nonsensical quiz game! see if you can get all the answers right! The questions aren't mine, they are from the Earth Worm Jim video game.
